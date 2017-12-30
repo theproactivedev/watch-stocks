@@ -18,12 +18,12 @@ let Stock = require("./app/models/Stock.js");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-// app.route("/")
-// .get(function(req, res) {
-//   res.sendFile(path.join(__dirname + '/client/public/index.html'));
-// });
+app.route("/")
+.get(function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 io.on('connection', function(socket) {
 
