@@ -20,12 +20,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/public')));
 
-app.route("/")
-.get(function(req, res) {
-  res.sendFile(path.join(__dirname + '/client/public/index.html'));
-});
+// app.route("/")
+// .get(function(req, res) {
+//   res.sendFile(path.join(__dirname + '/client/public/index.html'));
+// });
 
 io.on('connection', function(socket) {
+
+  socket.on("requestStockList", function(message) {
+    console.log("Request stock list is happening");
+    if (message === "Requesting stock list") {
+      Stock.find({}, function(err, data) {
+        if (err) {
+          console.log("Error on getting the stock symbols: " + err);
+        } else {
+          console.log("Emitting stock list happening");
+          io.emit("stockList", {
+            items: data,
+            identification: process.env.API_KEY
+          });
+        }
+      });
+    }
+  });
 
   socket.on("newStock", function(stockSymbol) {
     var stock = new Stock({
@@ -36,27 +53,29 @@ io.on('connection', function(socket) {
 
     stock.save(function(err) {
   		if (err) {
-  			console.log(err);
+  			console.log("Error on adding stock: " + err);
   		}
+      io.emit("newSavedStock", {
+        symbol: stockSymbol,
+        identification: process.env.API_KEY
+      });
   	});
+  });
 
-    io.emit("newSavedStock", {symbol: stockSymbol, identification: process.env.REACT_APP_API_KEY});
+  socket.on("deleteStock", function(stockSymbol) {
+    Stock.remove({
+      "stock.symbol" : stockSymbol
+    }, function(err) {
+      if (err) {
+        console.log("Error on deleting stock: " + err);
+      }
+      io.emit("deletedStock", stockSymbol);
+    })
   });
 
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    console.log('User disconnected');
   });
-});
-
-app.route("/stockList")
-.get(function(req, res) {
-  Stock.find({}, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json({items: data, identification: process.env.REACT_APP_API_KEY});
-    }
-  })
 });
 
 http.listen(process.env.PORT || 3001, function() {

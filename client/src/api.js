@@ -6,3 +6,16 @@ export function displayNewStock(cb) {
     cb(value);
   }));
 }
+
+export function deleteStock(cb) {
+  socket.on("deletedStock", (value => {
+    cb(value);
+  }));
+}
+
+export function receiveList(cb) {
+  socket.on("stockList", (value => {
+    console.log("Receiving stock list happening");
+    cb(value);
+  }));
+}

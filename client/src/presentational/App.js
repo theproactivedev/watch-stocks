@@ -2,6 +2,7 @@ import React from 'react';
 import MenuBar from './MenuBar';
 import StockChart from '../containers/StockChart';
 import StockForm from '../containers/StockForm';
+import StockList from '../containers/StockList';
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <MenuBar />
       <StockChart />
       <StockForm />
+      <StockList />
     </div>
   );
 }

@@ -2,3 +2,9 @@
   width: 100%;
   height: 400px;
 }
+
+p.error {
+  color: #bf0b26;
+  margin-bottom: 0;
+  text-align: center;
+}

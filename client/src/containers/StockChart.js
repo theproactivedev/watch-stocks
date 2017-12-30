@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
 import ReactHighCharts from 'react-highcharts';
-import { Panel } from 'react-bootstrap';
-import { displayNewStock } from '../api.js';
+import { displayNewStock, deleteStock, receiveList } from '../api.js';
 import { connect } from 'react-redux';
 import {
   getStockData,
-  getStockList
+  getStockList,
+  clearList,
+  deleteFromState,
+  receiveStockList
  } from '../actions.js';
+import '../css/stockchart.css';
 
 class StockChart extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     displayNewStock(value => this.props.dispatch(getStockData(value)));
+    deleteStock(value => this.props.dispatch(deleteFromState(value)));
+    receiveList(value => this.props.dispatch(receiveStockList(value)));
   }
 
   componentWillMount() {
+    this.props.dispatch(clearList());
+  }
+
+  componentDidMount() {
+    console.log("Getting stock list happening");
     this.props.dispatch(getStockList());
   }
 
@@ -47,33 +57,22 @@ class StockChart extends Component {
       },
       series: this.props.stockList
     };
-    var onError = this.props.error !== "";
 
     return (
       <div>
-      {onError &&
-        <Panel bsStyle="danger">
-          {this.props.error}
-        </Panel>
-      }
-
-      {!onError &&
         <div id="stockChart">
           <ReactHighCharts config={chartOptions} />
         </div>
-      }
       </div>
-
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { stockList, startDate, error } = state;
+  const { stockList, startDate } = state;
   return {
     stockList,
-    startDate,
-    error
+    startDate
   };
 }
 
