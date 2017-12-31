@@ -1,6 +1,6 @@
 // https://www.quandl.com/api/v3/datasets/WIKI/GOOG.json?api_key=gx3Qkf3QsZrziAAdGxrC&column_index=4&order=asc&start_date=2017-12-01&end_date=2017-12-05
 import io from 'socket.io-client';
-let socket = io('http://localhost:3000', {'forceNew':true });
+let socket = io('https://fcc-stocks.herokuapp.com/', {'forceNew':true });
 
 export const ADD_STOCK = "ADD_STOCK";
 export const FETCH_DATA_PENDING =  "FETCH_DATA_PENDING";
