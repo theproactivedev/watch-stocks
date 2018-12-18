@@ -26,7 +26,7 @@ function addStock(item) {
 
   if (item !== undefined && item.dataset !== undefined) {
     for (let i=0; i < item.dataset.data.length; i++) {
-      prices.push(item.dataset.data[i][1]);
+      prices.push(item.dataset.data[i][4]);
     }
 
     return {

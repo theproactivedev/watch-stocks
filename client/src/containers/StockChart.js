@@ -36,7 +36,7 @@ class StockChart extends Component {
         type: "line"
       },
       title: {
-        text: 'Stock Prices for the Last Three Months'
+        text: 'Stock Prices for January to March of this Year'
       },
       xAxis: {
         type: 'datetime'

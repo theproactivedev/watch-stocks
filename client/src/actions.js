@@ -13,9 +13,13 @@ export const CLEAR_LIST = "CLEAR_LIST";
 export const DELETE_SYMBOL = "DELETE_SYMBOL";
 
 let moment = require("moment");
-let pointStart = moment().subtract(3, 'months');
+let pointStart = moment().subtract(12, 'months');
+let pointEnd = moment().subtract(3, 'months');
 let startDate =  pointStart.year() + "-" + (pointStart.month() + 1) + "-" + pointStart.date();
-let endDate = moment().year() + "-" + (moment().month() + 1) + "-" + moment().date();
+let endDate = pointEnd.year() + "-" + pointEnd.month() + "-" + pointEnd.date();
+
+console.log(startDate);
+console.log(endDate)
 
 function requestStockData() {
   return {
@@ -104,7 +108,7 @@ function isStockValid(data, symbol) {
 export function checkIfStockIsValid(symbol) {
   var url = `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json`;
   return (dispatch) => {
-    return fetch(url)
+    return fetch(url, {mode: 'cors'})
     .then(response => response.json(),
     error => console.log(error))
     .then(json => dispatch(isStockValid(json, symbol)));
@@ -113,7 +117,14 @@ export function checkIfStockIsValid(symbol) {
 
 export function getStockData(item) {
   console.log("Get data");
-  var url = `https://www.quandl.com/api/v3/datasets/WIKI/${item.symbol.toUpperCase()}.json?api_key=${item.identification}&order=asc&column_index=4&start_date=${startDate}&end_date=${endDate}`;
+  // var url = `https://www.quandl.com/api/v3/datasets/WIKI/${item.symbol.toUpperCase()}.json?api_key=${item.identification}&order=asc&column_index=4&start_date=${startDate}&end_date=${endDate}&collapse=monthly&transform=rdiff`;
+
+  // var url = `https://www.quandl.com/api/v3/datasets/WIKI/${item.symbol.toUpperCase()}.json?column_index=4&start_date=${startDate}&end_date=${endDate}&transform=rdiff&api_key=${item.identification}`;
+
+  var url = `https://www.quandl.com/api/v3/datasets/WIKI/${item.symbol.toUpperCase()}.json?api_key=${item.identification}&start_date=${startDate}&end_date=${endDate}`;
+  console.log(url);
+
+
 
   return (dispatch) => {
     dispatch(requestStockData());
