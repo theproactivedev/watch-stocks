@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Col } from 'react-bootstrap';
-import '../css/stocklist.css';
-import { deleteFromDB } from '../actions.js';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import ListGroup from "react-bootstrap/ListGroup";
+import { deleteFromDB } from "../actions.js";
 
 class StockList extends Component {
   deleteThis(symbol) {
@@ -12,32 +11,26 @@ class StockList extends Component {
   render() {
     let list = this.props.stockSymbols.map(symbol => {
       return (
-        <Col xs={12} md={6} lg={4} key={symbol}>
-          <li className="">{symbol.toUpperCase()}<span className="pull-right" onClick={this.deleteThis.bind(this, symbol)}><i className="fa fa-times-circle" aria-hidden="true"></i></span></li>
-        </Col>
+        <ListGroup.Item as="li" action variant="light" key={symbol} className="text-dark" >
+          {symbol.toUpperCase()}
+          <span className="pull-right" onClick={this.deleteThis.bind(this, symbol)}>
+            <i className="fa fa-times" aria-label="Delete Stock Code" aria-hidden="true"></i>
+            <span className="sr-only">Delete Stock Code</span>
+          </span>
+        </ListGroup.Item>
       );
     });
     return (
-      <div><ul>{list}</ul></div>
+      <ListGroup as="ul">{list}</ListGroup>
     );
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const { stockSymbols } = state;
-
   return {
     stockSymbols
   };
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     onSubmit: (item) => {
-//       dispatch(getStockData(item))
-//     },
-//     clearWarning : () => { dispatch(clearError()) }
-//   }
-// }
 
 export default connect(mapStateToProps)(StockList);

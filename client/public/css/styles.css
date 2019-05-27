@@ -1,11 +1,36 @@
-footer {
-  padding-top: 50px;
+body {
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  padding: 35px 0 0;
 }
 
-footer p {
+.fa-line-chart {
+  background: #000;
+  color: #fff;
+  font-size: 85%;
+  border-radius: 100%;
+  padding: 10px;
+}
+
+#stockChart {
+  width: 100%;
+}
+
+#stockChart svg rect {
+  fill:#000;
+}
+
+p.error {
+  color: #bf0b26;
+  margin-bottom: 0;
   text-align: center;
-  position: absolute;
-  bottom: 0;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 40px;
+  background-color:#414242;
   width: 100%;
 }
 
@@ -15,5 +40,9 @@ footer a {
 }
 
 footer a:hover {
-  color: #000;
+  color: #818182;
+}
+
+footer .row .col-12:first-of-type {
+  border-right: 1px solid #fff;
 }

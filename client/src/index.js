@@ -1,32 +1,25 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import {
-  watchStocks,
-  initialState
-} from './reducers';
-import App from './presentational/App';
-import registerServiceWorker from './registerServiceWorker';
-
-const loggerMiddleware = createLogger();
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { watchStocks, initialState } from "./reducers";
+import App from "./presentational/App";
+import registerServiceWorker from "./registerServiceWorker";
 
 let store = createStore(
   watchStocks,
   initialState,
   applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  )
+    thunkMiddleware
+   )
 );
 
 render(
   <Provider store={store}>
-    <App />
+    <App errorMsg={store.getState().err} />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 registerServiceWorker();

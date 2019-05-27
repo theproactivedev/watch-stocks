@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var StockSchema = new Schema({
@@ -11,4 +11,4 @@ var StockSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Stock', StockSchema);
+module.exports = mongoose.model("Stock", StockSchema);

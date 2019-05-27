@@ -1,21 +1,20 @@
-import io from 'socket.io-client';
-const socket = io('https://fcc-stocks.herokuapp.com/');
+import io from "socket.io-client";
+const socket = io("https://fcc-stocks.herokuapp.com/");
 
-export function displayNewStock(cb) {
-  socket.on("newSavedStock", (value => {
+export const displayNewStock = (cb) => {
+  socket.on("newSavedStock", ((value) => {
     cb(value);
   }));
 }
 
-export function deleteStock(cb) {
-  socket.on("deletedStock", (value => {
+export const deleteStock = (cb) => {
+  socket.on("deletedStock", ((value) => {
     cb(value);
   }));
 }
 
-export function receiveList(cb) {
-  socket.on("stockList", (value => {
-    console.log("Receiving stock list happening");
+export const receiveList = (cb) => {
+  socket.on("stockList", ((value) => {
     cb(value);
   }));
 }

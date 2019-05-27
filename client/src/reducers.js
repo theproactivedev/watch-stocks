@@ -5,11 +5,10 @@ import {
   CLEAR_ERROR,
   CLEAR_LIST,
   DELETE_SYMBOL
-} from './actions.js';
+} from "./actions.js";
 
-let colors = ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee',
-        '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'];
-let index = -1;
+let colors = ["#f45b5b", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#2b908f", "#90ee7e"];
+let index = 1;
 
 export const initialState = {
   isFetching: false,
@@ -21,12 +20,11 @@ export const initialState = {
   error: ""
 };
 
-function addStock(item) {
+const addStock = (item) => {
   let prices = [];
-
   if (item !== undefined && item.dataset !== undefined) {
-    for (let i=0; i < item.dataset.data.length; i++) {
-      prices.push(item.dataset.data[i][4]);
+    for (let i=item.dataset.data.length-1; i > -1; i--) {
+      prices.push([item.dataset.data[i][0], item.dataset.data[i][4]]);
     }
 
     return {
@@ -42,7 +40,7 @@ function addStock(item) {
   };
 }
 
-export function watchStocks(state=initialState, action) {
+export const watchStocks = (state=initialState, action) => {
   switch(action.type) {
     case FETCH_DATA_PENDING :
       return {
@@ -54,13 +52,13 @@ export function watchStocks(state=initialState, action) {
       return {
         ...state,
         isFetching: false,
-        startDate: action.info.start,
-        endDate: action.info.end,
-        currentStock: action.info.symbol,
+        startDate: action.stocks.dataset.data[action.stocks.dataset.data.length-1][0],
+        endDate: action.stocks.dataset.data[0][0],
+        currentStock: action.stocks.dataset.dataset_code,
         error: "",
         stockSymbols: [
           ...state.stockSymbols,
-          action.info.symbol
+          action.stocks.dataset.dataset_code
         ],
         stockList: [
           ...state.stockList,
