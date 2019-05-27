@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Form, FormControl, InputGroup, Col, Button, Alert, Row } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { checkIfStockIsValid, clearError } from "../actions.js";
 import { connect } from "react-redux";
 
@@ -58,9 +64,9 @@ class StockForm extends Component {
           <Row>
             <Col xs md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }} >
               <InputGroup className="mb-3">
-                <FormControl className="d-inline" type="text" placeholder="Enter stock symbol" onChange={(e) => this.handleInputChange(e)} />
+                <FormControl className="d-inline" type="text" placeholder="Enter stock code" onChange={(e) => this.handleInputChange(e)} aria-label="Enter stock code you want to display on the chart" />
                 <InputGroup.Append>
-                  <Button type="submit" variant="light" className="d-inline">Add</Button>
+                  <Button type="submit" variant="light" className="d-inline" aria-label="Add stock code">Add</Button>
                 </InputGroup.Append>
               </InputGroup>
             </Col>

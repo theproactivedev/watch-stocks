@@ -9,11 +9,15 @@ const App = ({ errorMsg }) => {
   return (
     <div>
       <div className="container">
-        <h1><i className="fa fa-line-chart" aria-hidden="true"></i> Stock Chart</h1>
-        <ErrorMessage />
-        <StockChart />
-        <StockForm />
-        <StockList />
+        <header>
+          <h1><i className="fa fa-line-chart" aria-hidden="true"></i> Stock Chart</h1>
+        </header>
+        <main>
+          <ErrorMessage />
+          <StockChart />
+          <StockForm />
+          <StockList />
+        </main>
       </div>
       <Footer />
     </div>
