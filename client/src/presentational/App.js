@@ -5,7 +5,7 @@ import StockList from "../containers/StockList";
 import ErrorMessage from "../containers/ErrorMessage";
 import Footer from "./Footer";
 
-const App = ({ errorMsg }) => {
+const App = () => {
   return (
     <div>
       <div className="container">

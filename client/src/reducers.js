@@ -75,10 +75,10 @@ export const watchStocks = (state=initialState, action) => {
       return {
         ...state,
         stockSymbols: state.stockSymbols.filter(symbol =>
-          symbol.toUpperCase() !== action.symbol.toUpperCase()
+          symbol !== action.symbol
         ),
         stockList: state.stockList.filter(item =>
-          item.name.toUpperCase() !== action.symbol.toUpperCase()
+          item.name !== action.symbol
         )
       }
     case CLEAR_ERROR :

@@ -46,7 +46,7 @@ class StockForm extends Component {
   }
 
   handleInputChange(e) {
-    this.setState({ input: e.target.value });
+    this.setState({ input: e.target.value.toUpperCase() });
   }
 
   handleSubmit(e) {
@@ -78,12 +78,12 @@ class StockForm extends Component {
     return (
       <div className="form">
         {this.state.warning !== "" &&
-          <Alert bsStyle="danger" onClick={this.hideWarning}>
+          <Alert variant = "danger" onClick={this.hideWarning}>
             <p className="error">{this.state.warning}</p>
           </Alert>
         }
         {this.props.error !== "" &&
-          <Alert bsStyle="danger" onClick={this.hideWarning}>
+          <Alert variant = "danger" onClick={this.hideWarning}>
             <p className="error">{this.props.error}</p>
           </Alert>
         }

@@ -24,7 +24,6 @@ class StockChart extends Component {
     displayNewStock(value => this.props.dispatch(getStockData(value))); 
     deleteStock(value => this.props.dispatch(deleteFromState(value))); 
     receiveList(value => this.props.dispatch(receiveStockList(value)));
-    this.formatDate = this.formatDate.bind(this);
   }
 
   componentDidMount() {     
@@ -33,10 +32,6 @@ class StockChart extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(clearList());
-  }
-
-  formatDate(date) {
-    return months[date.getUTCMonth()] + " " + date.getUTCDate() + ", " + date.getUTCFullYear();
   }
 
   render() {

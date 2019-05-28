@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListGroup from "react-bootstrap/ListGroup";
-import { deleteFromDB } from "../actions.js";
+import { deleteFromDB, deleteFromState } from "../actions.js";
 
 class StockList extends Component {
   deleteThis(symbol) {
-    deleteFromDB(symbol);
+    deleteFromDB(symbol)
+    this.props.dispatch(deleteFromState(symbol));
   }
 
   render() {

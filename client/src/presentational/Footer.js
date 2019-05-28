@@ -15,7 +15,7 @@ const Footer = () => {
             <p>Send me a message on my email, eiringonzales@gmail.com</p>
           </Col>
         </Row>
-        <p class="text-center py-4"><a href="https://eiringonzales.com/" target="_blank" rel="noopener noreferrer">Eirin Gonzales</a></p>
+        <p className="text-center py-4"><a href="https://eiringonzales.com/" target="_blank" rel="noopener noreferrer">Eirin Gonzales</a></p>
       </div>
     </footer>
   );

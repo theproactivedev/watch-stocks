@@ -1,6 +1,8 @@
 import io from "socket.io-client";
 import moment from "moment";
 let socket = io("https://fcc-stocks.herokuapp.com/", {"forceNew":true });
+// let socket = io("https://localhost:3000/");
+
 
 export const ADD_STOCK = "ADD_STOCK";
 export const FETCH_DATA_PENDING =  "FETCH_DATA_PENDING";
@@ -42,19 +44,16 @@ export const deleteFromDB = (symbol) => {
 }
 
 const receiveStockData = (stocks) => {
-  if(stocks !== undefined && stocks.quandl_error !== undefined) {
+  if(stocks === undefined) {
     return {
       type: FETCH_DATA_REJECTED,
       err : "Sorry, we encountered a technical error. Please refresh the page."
     }
-  } else {
-    if (stocks.dataset !== undefined) {
-      return {
-        type: FETCH_DATA_RECEIVED,
-        stocks
-      };
-    }
   }
+  return {
+    type: FETCH_DATA_RECEIVED,
+    stocks
+  };
 };
 
 export const receiveStockList = (data) => {
@@ -112,7 +111,7 @@ export const getStockData = (item) => {
 
   return (dispatch) => {
     dispatch(requestStockData());
-    return fetch(url)
+    return fetch(url, {mode: "cors"})
     .then(response => response.json(),
     error => console.log(error))
     .then(json => dispatch(receiveStockData(json)));

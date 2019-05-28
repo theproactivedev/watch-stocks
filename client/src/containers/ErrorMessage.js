@@ -7,25 +7,17 @@ class ErrorMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isErrorMsg: false,
+      isErrorMsg: this.props.error.length > 0 ,
     };
 
     this.handleDismiss = this.handleDismiss.bind(this);
-    this.checkIfThereIsError = this.checkIfThereIsError.bind(this); 
   }
 
   handleDismiss = () => {
     this.setState({ isErrorMsg: false });
   }
 
-  checkIfThereIsError = () => {
-    if (this.props.error.length > 0 ) {
-      this.setState({ isErrorMsg: true });
-    }
-  }
-
   render() {
-    this.checkIfThereIsError();
     return(
       <div>
         {this.state.isErrorMsg &&
