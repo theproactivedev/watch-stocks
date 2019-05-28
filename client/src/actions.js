@@ -1,8 +1,6 @@
 import io from "socket.io-client";
 import moment from "moment";
 let socket = io("http://eg-fcc-stocks.herokuapp.com/", {"forceNew":true });
-// let socket = io("https://localhost:3000/");
-
 
 export const ADD_STOCK = "ADD_STOCK";
 export const FETCH_DATA_PENDING =  "FETCH_DATA_PENDING";
