@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-const socket = io("http://eg-fcc-stocks.herokuapp.com/");
+const socket = io("https://fcc-stocks.herokuapp.com/");
 
 export const displayNewStock = (cb) => {
   socket.on("newSavedStock", ((value) => {
